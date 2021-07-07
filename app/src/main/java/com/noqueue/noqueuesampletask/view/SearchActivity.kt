@@ -79,6 +79,7 @@ class SearchActivity : AppCompatActivity() {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     cardLayout?.visibility= View.GONE
+                        binding?.noResult?.visibility= GONE
                 }
                 override fun afterTextChanged(editable: Editable?) {
                     if (handler == null) {
@@ -113,7 +114,11 @@ class SearchActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             viewModel?.searchList?.removeObservers(this@SearchActivity)
             viewModel?.searchList?.observe(this@SearchActivity, Observer {
-
+                var handlerHasCallbacks =if(searchRunnable!=null){  handler?.hasCallbacks(searchRunnable!!)?:false } else false
+                 if(it.isEmpty() && !handlerHasCallbacks )
+                     binding?.noResult?.visibility= VISIBLE
+                 else
+                     binding?.noResult?.visibility= GONE
                 updateSearchList(it)
                 binding?.progress?.visibility=GONE
             })

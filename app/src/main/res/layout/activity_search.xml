@@ -118,6 +118,20 @@
                             android:drawableStart="@drawable/ic_search"
 
                             android:textSize="13sp" />
+                        <TextView
+                            android:id="@+id/noResult"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_below="@id/searchbar"
+                            android:text="Sorry, no results found :("
+                            android:textColor="@color/orange_700"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/font_regular"
+                            android:gravity="center"
+                            tools:visibility="visible"
+                            android:visibility="gone"
+                            android:layout_marginBottom="16dp"
+                            />
                         <com.google.android.material.progressindicator.CircularProgressIndicator
                             android:id="@+id/progress"
                             android:layout_width="10dp"
